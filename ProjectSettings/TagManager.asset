@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - "if (timer > 10)\r\n{\r\n    deathBalls[1].SetActive(true);\r\n}"
+  - Halfpipe
   layers:
   - Default
   - TransparentFX
