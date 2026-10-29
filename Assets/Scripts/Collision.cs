@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collision : MonoBehaviour
 {
     public GameObject playerBall;
+    public Rigidbody2D playerRigid;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,11 @@ public class Collision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerRigid.constraints = RigidbodyConstraints2D.None;
+            playerRigid.WakeUp();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -23,11 +28,8 @@ public class Collision : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerBall.transform.position = new Vector2(-12, 7);
-        }
+            playerRigid.constraints = RigidbodyConstraints2D.FreezeAll;
 
-        if (collision.gameObject.tag == "Halfpipe")
-        {
-            
         }
     }
 }
