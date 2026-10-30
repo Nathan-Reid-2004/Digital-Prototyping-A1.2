@@ -27,7 +27,7 @@ public class Collision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerBall.transform.position = new Vector2(-12, 7);
+            playerBall.transform.position = new Vector2(-10, 7);
             playerRigid.constraints = RigidbodyConstraints2D.FreezeAll;
 
         }
