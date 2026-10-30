@@ -96,7 +96,7 @@ The main progression here is the upping of stress as more hazard balls spawn, gi
 
 
 
-* Assignment 1 (*Applications of Game Engines*, GAME-10009): Player Controller \& Collision with Hazards Using OnCollisionEnter2D
+* Assignment 1 (*Applications of Game Engines*, GAME-10009): Player Controller, Camera Movement, & Collision with Hazards Using OnCollisionEnter2D
 
 
 
@@ -113,6 +113,138 @@ The main progression here is the upping of stress as more hazard balls spawn, gi
 
 
 * [https://assetstore.unity.com/packages/2d/2d-kit-fantasy-game-stuff-248412#description](https://assetstore.unity.com/packages/2d/2d-kit-fantasy-game-stuff-248412#description)
+
+***
+
+
+### **Code Snippets**
+
+###### **Collision with Hazard & Respawning with Physics Freeze**
+```C#
+ void Update()
+ {
+     if (Input.GetKeyDown(KeyCode.Space))
+     {
+         playerRigid.constraints = RigidbodyConstraints2D.None;
+         playerRigid.WakeUp();
+     }
+ }
+
+ private void OnCollisionEnter2D(Collision2D collision)
+ {
+     if (collision.gameObject.tag == "Player")
+     {
+         print("game over oat");
+
+         playerBall.transform.position = new Vector2(0, 7);
+         playerRigid.constraints = RigidbodyConstraints2D.FreezeAll;
+
+     }
+ }
+```
+
+###### **Player Controller**
+```C#
+ void Start()
+ {
+     rb2d = GetComponent<Rigidbody2D>();
+     coyoteTime = coyoteTimeMax;
+ }
+
+ // Update is called once per frame
+ void Update()
+ {
+     isGrounded = JumpRegister();
+
+     if (isGrounded)
+     {
+         // print("yeah true");
+         coyoteTime = coyoteTimeMax;
+     }
+     else
+     {
+         coyoteTime -= Time.deltaTime;
+     }
+
+     HandleMovement();
+     HandleJump();
+ }
+ public void HandleMovement()
+ {
+     rb2d.velocity = new Vector2(rb2d.velocity.x + (Input.GetAxis("Horizontal") * movementInfluenceFactor),
+     rb2d.velocity.y);
+
+     if (rb2d.velocity.y > 0 && Input.GetKey(KeyCode.S)) // holding s?
+     {
+         rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y / 8);
+     }
+     else if (rb2d.velocity.y < 0 && Input.GetKey(KeyCode.S)) // holding s and starting to fall?
+     {
+         rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y - 0.025f);
+     }
+
+ }
+
+ public void HandleJump()
+ {
+     if (coyoteTime > 0 && Input.GetKeyDown(KeyCode.Space))
+     {
+         // Jump using the Rigidbody velocity
+         rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+     }
+
+     if (rb2d.velocity.y < 0)
+     {
+         rb2d.velocity += (Vector2.up * Physics2D.gravity.y *
+             (fallMultiplier * Time.deltaTime));
+     }
+     // ascending and space is not being held
+     else if (rb2d.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+     {
+         // if not pressing key, apply lowjump mult
+         rb2d.velocity += (Vector2.up * Physics2D.gravity.y *
+             (lowJumpMultiplier * Time.deltaTime));
+     }
+ }
+
+ bool JumpRegister()
+ {
+     bool check = Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, groundLayer); 
+     // using a raycast to determine the players distance away from the ground using starting point, direction, size, and layer respectively
+     return check;
+ }
+```
+
+###### **Camera Movement**
+```C#
+    void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        Vector3 newPos = new Vector3(target.position.x, target.position.y, transform.position.z);
+        float extraYPosition;
+        float centerCalc = 1 / fromCenter;
+        Vector3 cameraOffsetVar = cameraOffset;
+        if (newPos.y > 0)
+        {
+            extraYPosition = newPos.y;
+            fromCenter = 0.5f;
+            cameraOffsetVar = new Vector3(cameraOffsetVar.x, -target.position.y / 1.4f, cameraOffsetVar.z);
+        }
+        else 
+        extraYPosition = 0;
+
+            transform.position = 
+                Vector3.Lerp(transform.position, 
+                new Vector3(newPos.x / centerCalc, extraYPosition + newPos.y / centerCalc, newPos.z) + cameraOffsetVar, 
+                Time.deltaTime * smoothFactor);
+    }
+}
+```
 
 ***
 
