@@ -1,14 +1,13 @@
-#### **Intro**
+### **Intro**
 
 
 
 Our second prototype under NexGen Studios is intended to test whether or not momentum-based platforming can be fun when stuck in a looping environment, such as a halfpipe. We feel trapping the player within a limiting space would make for interesting gameplay. Rather than using momentum purely to build up speed or clear gaps in the environment, momentum will be used more as a defense mechanism. Players will need to use momentum to avoid hazards- our prototype is less of a game of speed, and more of a game of endurance. The objective of our test level is for players to survive as long as possible, using their momentum in smart ways while maintaining a safe speed and quick wits.
-
-\*\*\*
-
+***
 
 
-#### **Technology**
+
+### **Technology**
 
 
 
@@ -20,11 +19,11 @@ Assets: Unity Asset Store
 
 Repository host: GitHub
 
-\*\*\*
+***
 
 
 
-#### **Objective Statement**
+### **Objective Statement**
 
 
 
@@ -47,22 +46,21 @@ While there are platformers that use momentum as a way to propel the player forw
 
 
 We have determined that yes, it is decently fun to perform momentum-based platforming in a confining, looping environment. Using the speed of the halfpipe and bouncing off of the walls is fairly satisfying. Yet, there is a certain intensity to each movement that comes with the sense of momentum and weight, in conjunction with the enclosed environment that limits the player's movement. The halfpipe environment gives ample opportunity to generate speed and get away with interesting maneuvers, but at the same time, it generates stress as a result of its space limitations. Although there is definitely some fine-tuning to be done in certain areas, we are confident our prototype could stand on it's own within a larger game.
-
-\*\*\*
-
+***
 
 
-#### **Design Rationale**
+
+### **Design Rationale**
 
 
 
 If this prototype were to be part of a larger game, it would likely be part of a momentum-based platformer game, similar to something like the *Marble Blast* series, where players need to roll around environments using slopes/momentum to their advantage. This halfpipe could be implemented in the form of a level where players must avoid falling obstacles for a certain amount of time. Or, perhaps it could even be used as an "endless" or "arcade" mode, where players need to stay alive for as long as possible and the falling obstacles become more difficult to dodge as time goes on (the longer the player survives, the higher the score they get).
 
-\*\*\*
+***
 
 
 
-#### **Mechanic(s)**
+### **Mechanic(s)**
 
 
 
@@ -72,11 +70,11 @@ We will include a small jump function so that players can have a little more con
 
 Within this halfpipe environment, balls are spawning from above and will drop down onto the halfpipe. The player must avoid these balls by rolling around, using the momentum and shape of the halfpipe to their advantage. If they are hit by one of these hazard balls, they will respawn in the middle of the playing field, where they are safe until they press the spacebar, which will reactivate their physics. This gives the player a bit of a buffer for when they are hit.
 
-\*\*\*
+***
 
 
 
-#### **Progression**
+### **Progression**
 
 
 
@@ -86,11 +84,21 @@ As mentioned before, this is a game of endurance. As time goes on, more hazard b
 
 The main progression here is the upping of stress as more hazard balls spawn, giving more for the player to deal with. If this were to be a full level or arcade mode in a game, we would likely make it so that the rate at which the hazards spawn becomes higher as the game goes on. We could also make the hazards more bouncy or sporadic in their movement to up the difficulty.
 
-\*\*\*
+***
+
+
+### **Aesthetics**
+
+
+We aimed for the aesthetics of our prototype to use darker colours contrasted with harsh, bright colours to give off a sense of discomfort and stress. This is most evident with the halfpipe (a mix of bright red and black) and the hazards (which are also bright red). There is no in-between. There are intense darks and vibrant lights, with no neutral or subdued tones, which helps with the uneasy feeling we want our game to have. 
+
+If we were to expand this into a full game, we would likely realize this aesthetic more, leaning further into the harsh contrasting colours. Perhaps we could even go the route of psychedelic visuals, though that could end up being too intense. Either way, we want our visuals to be relatively cartoonish, while still conveying the intensity and panic felt during gameplay. 
+
+***
 
 
 
-#### **Sources**
+### **Sources**
 
 
 
@@ -98,7 +106,7 @@ The main progression here is the upping of stress as more hazard balls spawn, gi
 
 
 
-* Assignment 1 (*Applications of Game Engines*, GAME-10009): Player Controller \& Collision with Hazards Using OnCollisionEnter2D
+* Assignment 1 (*Applications of Game Engines*, GAME-10009): Player Controller, Camera Movement, & Collision with Hazards Using OnCollisionEnter2D
 
 
 
@@ -116,11 +124,143 @@ The main progression here is the upping of stress as more hazard balls spawn, gi
 
 * [https://assetstore.unity.com/packages/2d/2d-kit-fantasy-game-stuff-248412#description](https://assetstore.unity.com/packages/2d/2d-kit-fantasy-game-stuff-248412#description)
 
-\*\*\*
+***
+
+
+### **Code Snippets**
+
+###### **Collision with Hazard & Respawning with Physics Freeze**
+```C#
+ void Update()
+ {
+     if (Input.GetKeyDown(KeyCode.Space))
+     {
+         playerRigid.constraints = RigidbodyConstraints2D.None;
+         playerRigid.WakeUp();
+     }
+ }
+
+ private void OnCollisionEnter2D(Collision2D collision)
+ {
+     if (collision.gameObject.tag == "Player")
+     {
+         print("game over oat");
+
+         playerBall.transform.position = new Vector2(0, 7);
+         playerRigid.constraints = RigidbodyConstraints2D.FreezeAll;
+
+     }
+ }
+```
+
+###### **Player Controller**
+```C#
+ void Start()
+ {
+     rb2d = GetComponent<Rigidbody2D>();
+     coyoteTime = coyoteTimeMax;
+ }
+
+ // Update is called once per frame
+ void Update()
+ {
+     isGrounded = JumpRegister();
+
+     if (isGrounded)
+     {
+         // print("yeah true");
+         coyoteTime = coyoteTimeMax;
+     }
+     else
+     {
+         coyoteTime -= Time.deltaTime;
+     }
+
+     HandleMovement();
+     HandleJump();
+ }
+ public void HandleMovement()
+ {
+     rb2d.velocity = new Vector2(rb2d.velocity.x + (Input.GetAxis("Horizontal") * movementInfluenceFactor),
+     rb2d.velocity.y);
+
+     if (rb2d.velocity.y > 0 && Input.GetKey(KeyCode.S)) // holding s?
+     {
+         rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y / 8);
+     }
+     else if (rb2d.velocity.y < 0 && Input.GetKey(KeyCode.S)) // holding s and starting to fall?
+     {
+         rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y - 0.025f);
+     }
+
+ }
+
+ public void HandleJump()
+ {
+     if (coyoteTime > 0 && Input.GetKeyDown(KeyCode.Space))
+     {
+         // Jump using the Rigidbody velocity
+         rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+     }
+
+     if (rb2d.velocity.y < 0)
+     {
+         rb2d.velocity += (Vector2.up * Physics2D.gravity.y *
+             (fallMultiplier * Time.deltaTime));
+     }
+     // ascending and space is not being held
+     else if (rb2d.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+     {
+         // if not pressing key, apply lowjump mult
+         rb2d.velocity += (Vector2.up * Physics2D.gravity.y *
+             (lowJumpMultiplier * Time.deltaTime));
+     }
+ }
+
+ bool JumpRegister()
+ {
+     bool check = Physics2D.Raycast(transform.position, Vector2.down, groundCheckLength, groundLayer); 
+     // using a raycast to determine the players distance away from the ground using starting point, direction, size, and layer respectively
+     return check;
+ }
+```
+
+###### **Camera Movement**
+```C#
+    void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        Vector3 newPos = new Vector3(target.position.x, target.position.y, transform.position.z);
+        float extraYPosition;
+        float centerCalc = 1 / fromCenter;
+        Vector3 cameraOffsetVar = cameraOffset;
+        if (newPos.y > 0)
+        {
+            extraYPosition = newPos.y;
+            fromCenter = 0.5f;
+            cameraOffsetVar = new Vector3(cameraOffsetVar.x, -target.position.y / 1.4f, cameraOffsetVar.z);
+        }
+        else 
+        extraYPosition = 0;
+
+            transform.position = 
+                Vector3.Lerp(transform.position, 
+                new Vector3(newPos.x / centerCalc, extraYPosition + newPos.y / centerCalc, newPos.z) + cameraOffsetVar, 
+                Time.deltaTime * smoothFactor);
+    }
+}
+```
+
+***
 
 
 
-#### **Prototype Iteration**
+### **Prototype Iteration**
 
 
 
