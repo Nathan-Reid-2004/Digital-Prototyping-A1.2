@@ -1,14 +1,13 @@
-#### **Intro**
+### **Intro**
 
 
 
 Our second prototype under NexGen Studios is intended to test whether or not momentum-based platforming can be fun when stuck in a looping environment, such as a halfpipe. We feel trapping the player within a limiting space would make for interesting gameplay. Rather than using momentum purely to build up speed or clear gaps in the environment, momentum will be used more as a defense mechanism. Players will need to use momentum to avoid hazards- our prototype is less of a game of speed, and more of a game of endurance. The objective of our test level is for players to survive as long as possible, using their momentum in smart ways while maintaining a safe speed and quick wits.
-
-\*\*\*
-
+***
 
 
-#### **Technology**
+
+### **Technology**
 
 
 
@@ -20,11 +19,11 @@ Assets: Unity Asset Store
 
 Repository host: GitHub
 
-\*\*\*
+***
 
 
 
-#### **Objective Statement**
+### **Objective Statement**
 
 
 
@@ -47,22 +46,21 @@ While there are platformers that use momentum as a way to propel the player forw
 
 
 We have determined that yes, it is decently fun to perform momentum-based platforming in a confining, looping environment. Using the speed of the halfpipe and bouncing off of the walls is fairly satisfying. Yet, there is a certain intensity to each movement that comes with the sense of momentum and weight, in conjunction with the enclosed environment that limits the player's movement. The halfpipe environment gives ample opportunity to generate speed and get away with interesting maneuvers, but at the same time, it generates stress as a result of its space limitations. Although there is definitely some fine-tuning to be done in certain areas, we are confident our prototype could stand on it's own within a larger game.
-
-\*\*\*
-
+***
 
 
-#### **Design Rationale**
+
+### **Design Rationale**
 
 
 
 If this prototype were to be part of a larger game, it would likely be part of a momentum-based platformer game, similar to something like the *Marble Blast* series, where players need to roll around environments using slopes/momentum to their advantage. This halfpipe could be implemented in the form of a level where players must avoid falling obstacles for a certain amount of time. Or, perhaps it could even be used as an "endless" or "arcade" mode, where players need to stay alive for as long as possible and the falling obstacles become more difficult to dodge as time goes on (the longer the player survives, the higher the score they get).
 
-\*\*\*
+***
 
 
 
-#### **Mechanic(s)**
+### **Mechanic(s)**
 
 
 
@@ -72,11 +70,11 @@ We will include a small jump function so that players can have a little more con
 
 Within this halfpipe environment, balls are spawning from above and will drop down onto the halfpipe. The player must avoid these balls by rolling around, using the momentum and shape of the halfpipe to their advantage. If they are hit by one of these hazard balls, they will respawn in the middle of the playing field, where they are safe until they press the spacebar, which will reactivate their physics. This gives the player a bit of a buffer for when they are hit.
 
-\*\*\*
+***
 
 
 
-#### **Progression**
+### **Progression**
 
 
 
@@ -86,11 +84,11 @@ As mentioned before, this is a game of endurance. As time goes on, more hazard b
 
 The main progression here is the upping of stress as more hazard balls spawn, giving more for the player to deal with. If this were to be a full level or arcade mode in a game, we would likely make it so that the rate at which the hazards spawn becomes higher as the game goes on. We could also make the hazards more bouncy or sporadic in their movement to up the difficulty.
 
-\*\*\*
+***
 
 
 
-#### **Sources**
+### **Sources**
 
 
 
@@ -116,11 +114,11 @@ The main progression here is the upping of stress as more hazard balls spawn, gi
 
 * [https://assetstore.unity.com/packages/2d/2d-kit-fantasy-game-stuff-248412#description](https://assetstore.unity.com/packages/2d/2d-kit-fantasy-game-stuff-248412#description)
 
-\*\*\*
+***
 
 
 
-#### **Prototype Iteration**
+### **Prototype Iteration**
 
 
 
