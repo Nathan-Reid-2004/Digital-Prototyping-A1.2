@@ -301,4 +301,18 @@ If we were to expand this into a full game, we would likely realize this aesthet
 
 
 * As a final change, we altered the hazard balls to retain their movement a bit more, as well as act somewhat sporadically with increased bounciness. This makes the hazards more threatening, and they remain as a threat for much longer as they move around the halfpipe (as opposed to getting stuck at the bottom of the halfpipe fairly quickly).
+***
 
+### **Documentation Photos**
+
+###### **Initial Concept**
+![Concept1](DocumentationPhotos/concept1.png)
+
+###### **Scrapped 3D Concept**
+![Concept1](DocumentationPhotos/3didea.png)
+
+###### **Falling Hazards Concept**
+![Concept1](DocumentationPhotos/concept2.png)
+
+###### **First In-Engine Iteration**
+![Concept1](DocumentationPhotos/iteration1.png)
