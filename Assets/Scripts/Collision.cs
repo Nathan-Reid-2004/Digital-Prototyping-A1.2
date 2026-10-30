@@ -27,7 +27,9 @@ public class Collision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerBall.transform.position = new Vector2(-10, 7);
+            print("game over oat");
+
+            playerBall.transform.position = new Vector2(0, 7);
             playerRigid.constraints = RigidbodyConstraints2D.FreezeAll;
 
         }

@@ -405,7 +405,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.63
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothFactor: 1.25
   fromCenter: 0.2
-  cameraOffset: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 8, z: 0}
 --- !u!1 &520137088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2648251037921799151, guid: d3fa1c7b9bcbc444d92ccac725fa5f6d, type: 3}
@@ -1022,10 +1022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: {x: 0, y: 0}
-  jumpHeight: 15
+  jumpHeight: 13
   movementInfluenceFactor: 0.075
-  lowJumpMultiplier: 1.3
-  fallMultiplier: 2
+  lowJumpMultiplier: 1.6
+  fallMultiplier: 2.25
   coyoteTime: 0
   coyoteTimeMax: 0.1
   groundCheckLength: 1.5

@@ -38,7 +38,7 @@ public class Hazards : MonoBehaviour
             deathBalls[2].SetActive(true);
         }
 
-        if (timer > 15)
+        if (timer > 20)
         {
             deathBalls[3].SetActive(true);
         }
@@ -48,29 +48,30 @@ public class Hazards : MonoBehaviour
             deathBalls[4].SetActive(true);
         }
 
-        if (timer > 25)
+        if (timer > 30)
         {
             deathBalls[5].SetActive(true);
         }
 
-        if (timer > 30)
+        if (timer > 35)
         {
             deathBalls[6].SetActive(true);
         }
 
-        if (timer > 35)
+        if (timer > 45)
         {
             deathBalls[7].SetActive(true);
         }
 
-        if (timer > 40)
+        if (timer > 55)
         {
             deathBalls[8].SetActive(true);
         }
 
-        if (timer > 45)
+        if (timer > 65)
         {
             deathBalls[9].SetActive(true);
+            print("now survive crodie");
         }
 
     }

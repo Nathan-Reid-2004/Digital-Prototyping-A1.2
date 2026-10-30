@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
-            print("yeah true");
+            // print("yeah true");
             coyoteTime = coyoteTimeMax;
         }
         else
