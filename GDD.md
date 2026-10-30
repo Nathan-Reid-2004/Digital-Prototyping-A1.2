@@ -87,6 +87,16 @@ The main progression here is the upping of stress as more hazard balls spawn, gi
 ***
 
 
+### **Aesthetics**
+
+
+We aimed for the aesthetics of our prototype to use darker colours contrasted with harsh, bright colours to give off a sense of discomfort and stress. This is most evident with the halfpipe (a mix of bright red and black) and the hazards (which are also bright red). There is no in-between. There are intense darks and vibrant lights, with no neutral or subdued tones, which helps with the uneasy feeling we want our game to have. 
+
+If we were to expand this into a full game, we would likely realize this aesthetic more, leaning further into the harsh contrasting colours. Perhaps we could even go the route of psychedelic visuals, though that could end up being too intense. Either way, we want our visuals to be relatively cartoonish, while still conveying the intensity and panic felt during gameplay. 
+
+***
+
+
 
 ### **Sources**
 
